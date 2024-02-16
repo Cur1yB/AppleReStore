@@ -12,8 +12,8 @@ def registration(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)  # Обратите внимание на использование auth_login
-            return redirect('dashboard')  # Перенаправляем на страницу dashboard
+            auth_login(request, user) 
+            return redirect('dashboard') 
     else:
         form = CustomUserCreationForm()
     return render(request, 'auth_app/registration.html', {'form': form})
@@ -42,7 +42,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Важно, чтобы пользователь не выходил из системы
+            update_session_auth_hash(request, user) 
             messages.success(request, 'Ваш пароль был успешно обновлен!')
             return redirect('dashboard')
         else:
@@ -70,7 +70,6 @@ def change_username(request):
     if request.method == 'POST':
         form = UsernameChangeForm(request.POST, instance=request.user)
         if form.is_valid():
-            # Сохраняем форму, если пароль подтвержден
             form.save()
             messages.success(request, 'Ваше имя пользователя было успешно изменено.')
             return redirect('dashboard')
@@ -79,28 +78,3 @@ def change_username(request):
     else:
         form = UsernameChangeForm(instance=request.user)
     return render(request, 'auth_app/change_username.html', {'form': form})
-
-
-'''
-Пользователи
-Л: test06
-П: njg12341
-
-Л: test02
-П: njg2234A
-
-Л: test03
-П: njg2224A
-
-Л: test04
-П: njg2244A
-
-Л: test010
-П: njg22441
-
-Л: dupsyara
-П: njg22446
-
-Л: adminPlanEat
-П: n1r2r3a1
-'''

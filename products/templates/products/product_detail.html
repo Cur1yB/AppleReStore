@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<div class="product-detail">
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <h3>Цена: {{ product.price }}$</h3>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for image in product.images.all %}
+            <div class="swiper-slide">
+                <img src="{{ image.image.url }}" alt="Image">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'creative',
+      creativeEffect: {
+        prev: {
+          shadow: true,
+          translate: ["-120%", 0, -500],
+          rotate: [0, 0, -1],
+        },
+        next: {
+          shadow: true,
+          translate: ["120%", 0, -500],
+          rotate: [0, 0, 1],
+        },
+      },
+      loop: true,
+      slidesPerView: 1,
+      centeredSlides: true,
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+</script>
+{% endblock %}

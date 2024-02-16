@@ -1,3 +1,5 @@
+# applerestore/applerestore/settings.py
+
 from pathlib import Path
 import os
 
@@ -18,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'auth_app',
+    'products'
 ]
 
 MIDDLEWARE = [
@@ -93,3 +96,6 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
